@@ -16,12 +16,15 @@ import servicioCliente.FacturaServicio;
  */
 public class FacturaControl {
     
-    private final FacturaServicio facturaServicio = new FacturaServicio();
-    private final ClienteServicio clienteServicio = new ClienteServicio();
+    private static FacturaServicio facturaServicio = new FacturaServicio();
+    private static ClienteControl clienteControl =  new ClienteControl();
+    private static ProductoControl productoControl =  new ProductoControl();
     public Factura crear(String [] args){
        
-        Factura factura = new Factura(Integer.valueOf(args[0]),args[1],args[2]);
+        Factura factura = new Factura(Integer.valueOf(args[0]),args[1],args[2],clienteControl.listar().get(Integer.valueOf(args[3])),productoControl.listar().get(Integer.valueOf(args[3])));
         this.facturaServicio.crear(factura);
+        
+        
         return factura;
     }
     public Factura buscarFactura(String arg){
@@ -34,7 +37,7 @@ public class FacturaControl {
         return this.facturaServicio.listar();
     }
     public List<Cliente>Listar(){
-        return this.clienteServicio.listar();
+        return this.clienteControl.listar();
     }
 
     public Factura modificar(String[] args) {

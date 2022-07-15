@@ -14,7 +14,12 @@ import modeloCliente.Producto;
  */
 public class ProductoServicio implements IProductoServicio{
     
-    private static List<Producto> productoList = new ArrayList<>();
+    private List<Producto> productoList;
+    
+    public ProductoServicio()
+    {
+        productoList = new ArrayList<>();
+    }
 
     @Override
     public Producto crear(Producto producto) {

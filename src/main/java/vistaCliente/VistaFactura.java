@@ -33,21 +33,13 @@ public class VistaFactura extends javax.swing.JInternalFrame   {
         initComponents();
         facturaControl= new FacturaControl();
         productoControl= new ProductoControl();
+        clienteControl= new ClienteControl();
         iva = 0;
         descuento = 0;
-        Cliente.setText(VistaCliente());
-        Cliente1.setText(VistaProducto());
+   
 
     }
-    public static String VistaCliente(){
-        Cliente cliente = new Cliente();        
-        return cliente.getNombre();
-    }
 
-    public static String VistaProducto(){
-        Producto producto = new Producto();
-        return producto.getNombre();
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,9 +90,10 @@ public class VistaFactura extends javax.swing.JInternalFrame   {
         jSeparator1 = new javax.swing.JSeparator();
         jButton8 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        Cliente = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        Cliente1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jButton9 = new javax.swing.JButton();
 
         jLabel11.setText("Iva: %");
 
@@ -223,13 +216,13 @@ public class VistaFactura extends javax.swing.JInternalFrame   {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {"", null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Código", "Nombre", "Contacto"
+                "Código", "Nombre", "Contacto", "Cliente", "Producto"
             }
         ));
         tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -326,19 +319,21 @@ public class VistaFactura extends javax.swing.JInternalFrame   {
 
         jLabel13.setText("Cliente");
 
-        Cliente.setColumns(20);
-        Cliente.addActionListener(new java.awt.event.ActionListener() {
+        jLabel14.setText("Producto:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClienteActionPerformed(evt);
+                jComboBox1ActionPerformed(evt);
             }
         });
 
-        jLabel14.setText("Producto:");
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        Cliente1.setColumns(20);
-        Cliente1.addActionListener(new java.awt.event.ActionListener() {
+        jButton9.setText("Actualizar");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Cliente1ActionPerformed(evt);
+                jButton9ActionPerformed(evt);
             }
         });
 
@@ -375,11 +370,13 @@ public class VistaFactura extends javax.swing.JInternalFrame   {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Cliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton9)
                         .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -458,12 +455,14 @@ public class VistaFactura extends javax.swing.JInternalFrame   {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
+                        .addGap(3, 3, 3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel13)
-                                .addComponent(Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton3))))
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton3)
+                                .addComponent(jButton9)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
@@ -473,9 +472,9 @@ public class VistaFactura extends javax.swing.JInternalFrame   {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel14)
-                            .addComponent(Cliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -523,11 +522,15 @@ public class VistaFactura extends javax.swing.JInternalFrame   {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        String []info=new String[3];
+        String []info=new String[5];
         info[0]=this.codigo.getText();
         info[1]=this.nombre.getText();
+        info[3]=String.valueOf(this.jComboBox1.getSelectedIndex());
+        info[4]=String.valueOf(this.jComboBox3.getSelectedIndex());
         info[2]=this.contacto1.getText().toString();
 
+       
+ 
         try{
             facturaControl.crear(info);
              JOptionPane.showMessageDialog(null, "Ingreso exitoso!!!");
@@ -665,22 +668,36 @@ public class VistaFactura extends javax.swing.JInternalFrame   {
     this.actualizarTabla();
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteActionPerformed
-   
-    }//GEN-LAST:event_ClienteActionPerformed
-
-    private void Cliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cliente1ActionPerformed
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Cliente1ActionPerformed
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        System.out.println(clienteControl.listar().size());
+                System.out.println(productoControl.listar().size());
+
+        this.jComboBox1.removeAllItems();    
+        for(int i = 0; i<this.clienteControl.listar().size();i++)
+        {
+           this.jComboBox1.addItem(this.clienteControl.listar().get(i).getNombre());
+        }
+        this.jComboBox3.removeAllItems();
+        for(int i = 0; i<this.productoControl.listar().size();i++)
+        {
+           this.jComboBox3.addItem(this.productoControl.listar().get(i).getNombre());
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
     private void actualizarTabla(){
-           var datos = new Object[this.facturaControl.listar().size()][3];
-        var encabezado = new String[] {"Codigo", "Nombre", "Contacto"};
+           var datos = new Object[this.facturaControl.listar().size()][5];
+        var encabezado = new String[] {"Codigo", "Nombre", "Contacto","Cliente","Producto"};
         try{
         for(int i = 0; i<this.facturaControl.listar().size();i++)
         for(var factura:this.facturaControl.listar()){
             datos[i][0]=this.facturaControl.listar().get(i).getCodigo();
             datos[i][1]=this.facturaControl.listar().get(i).getNombre();
             datos[i][2]=this.facturaControl.listar().get(i).getDireccion();
+            datos[i][3]=this.facturaControl.listar().get(i).getCliente().getNombre();
+            datos[i][4]=this.facturaControl.listar().get(i).getProducto().getNombre();
         }
         this.modeloTabla = new DefaultTableModel(datos,encabezado);
         this.tabla.setModel(modeloTabla);
@@ -726,8 +743,6 @@ public class VistaFactura extends javax.swing.JInternalFrame   {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Cliente;
-    private javax.swing.JTextField Cliente1;
     private javax.swing.JTextField codigo;
     private javax.swing.JTextField contacto1;
     private javax.swing.JDialog dialogoconfiguracion;
@@ -739,7 +754,10 @@ public class VistaFactura extends javax.swing.JInternalFrame   {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

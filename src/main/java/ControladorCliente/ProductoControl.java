@@ -13,7 +13,7 @@ import servicioCliente.ProductoServicio;
  * @author mlata
  */
 public class ProductoControl {
-    private final ProductoServicio facturaServicio = new ProductoServicio();
+    private static ProductoServicio facturaServicio = new ProductoServicio();
     
     public Producto crear(String [] args){
         var producto= new Producto(Integer.valueOf(args[0]),args[1],args[2]);

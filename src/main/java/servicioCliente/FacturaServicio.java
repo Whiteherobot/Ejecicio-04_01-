@@ -20,7 +20,12 @@ import modeloCliente.Factura;
  */
 public class FacturaServicio implements IFacturaServicio{
     
-    private static List<Factura> facturaList = new ArrayList<>();
+    private List<Factura> facturaList ;
+    
+    public FacturaServicio()
+    {
+        facturaList = new ArrayList<>();
+    }
 
     @Override
     public Factura crear(Factura factura) {

@@ -14,7 +14,7 @@ import servicioCliente.ClienteServicio;
  */
 
 public class ClienteControl {
-    private final ClienteServicio clienteServicio = new ClienteServicio();
+    private static ClienteServicio clienteServicio = new ClienteServicio();
     public Cliente crear(String [] args){
         var cliente= new Cliente(Integer.valueOf(args[0]),args[1],args[2]);
         this.clienteServicio.crear(cliente);
@@ -35,13 +35,5 @@ public class ClienteControl {
         this.clienteServicio.modificar(Integer.valueOf(args[0]), clienteNuevo);
         return clienteNuevo;
     }
-    private int convertirEntero(String numero){
-        try{
-            return Integer.valueOf(numero);
-        }catch(NumberFormatException e){
-            throw new RuntimeException("El campo ingrsado solomanete recibe"+ "numeros");
-        }catch(Exception e){
-            throw new RuntimeException("Error inesperado");
-        }
-    }
+
 }

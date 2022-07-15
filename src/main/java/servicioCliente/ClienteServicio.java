@@ -4,7 +4,6 @@
  */
 package servicioCliente;
 
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import modeloCliente.Cliente;
@@ -14,7 +13,12 @@ import modeloCliente.Cliente;
  * @author mlata
  */
 public class ClienteServicio implements IClienteServicio {
-    private final List<Cliente> clienteList = new ArrayList<>();
+    private  List<Cliente> clienteList;
+    
+    public ClienteServicio()
+    {
+        clienteList = new ArrayList<>();
+    }
 
     @Override
     public Cliente crear(Cliente cliente) {
